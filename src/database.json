@@ -1,9 +1,9 @@
 {
   "records": [
     {
-      "username": "admin1",
+      "username": "admin",
       "email": "admin@website.com",
-      "password": "@dm1np@$$word123"
+      "password": "admin"
     },
     {
       "username": "johndoe",

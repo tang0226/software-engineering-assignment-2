@@ -7,14 +7,25 @@
     <h3>Login</h3>
     <div id="login-message" style="color: red"></div>
     <form id="login-form">
-      Username / Email: <input type="text" name="username" />
-      <br />
-      Password: <input type="password" name="password" />
-      <br />
-      <input type="submit" value="Login" />
+      <div>
+        Username / Email: <input type="text" name="username" />
+      </div>
+      <div>
+        Password: <input type="password" id="password-input" name="password" />
+      </div>
+      <div>
+        <input type="checkbox" id="checkbox" /> Show password
+      </div>
+      <input type="submit" id="checkbox" value="Login" />
     </form>
 
     <script type="text/javascript">
+      const passwordInput = document.querySelector('#password-input');
+      const checkbox = document.querySelector('#checkbox');
+      checkbox.addEventListener('change', () => {
+        passwordInput.setAttribute('type',  checkbox.checked ? 'text' : 'password');
+      });
+      
       const form = document.querySelector('#login-form');
       const loginMsg = document.querySelector('#login-message');
       
