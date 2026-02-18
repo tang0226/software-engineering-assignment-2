@@ -9,7 +9,7 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
 async function getDatabase() {
-  const records = JSON.parse(fs.readFileSync("database.json", "utf8")).records;
+  const records = JSON.parse(fs.readFileSync("./src/database.json", "utf8")).records;
 
   for (const rec of records) {
     rec.password = await bcrypt.hash(rec.password, saltRounds);
