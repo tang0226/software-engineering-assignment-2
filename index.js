@@ -33,11 +33,11 @@ const startServer = async () => {
   await hashPasswords();
 
   app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '/static/index.html'));
+    res.sendFile(path.join(__dirname, '/pages/index.html'));
   });
 
   app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, '/static/login.html'));
+    res.sendFile(path.join(__dirname, '/pages/login.html'));
   });
 
   app.post('/login', async (req, res) => {
@@ -70,7 +70,7 @@ const startServer = async () => {
   });
 
   app.get('/dashboard', (req, res) => {
-    res.sendFile(path.join(__dirname, '/static/dashboard.html'));
+    res.sendFile(path.join(__dirname, '/pages/dashboard.html'));
   });
 
   app.listen(port, () => {
