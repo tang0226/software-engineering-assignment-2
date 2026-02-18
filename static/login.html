@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Login page</title>
+  </head>
+  <body>
+    <h3>Login</h3>
+    <div id="login-message" style="color: red"></div>
+    <form id="login-form">
+      Username: <input type="text" name="username" />
+      <br />
+      Password: <input type="password" name="password" />
+      <br />
+      <input type="submit" value="Login" />
+    </form>
+
+    <script type="text/javascript">
+      const form = document.querySelector('#login-form');
+      const loginMsg = document.querySelector('#login-message');
+      
+      async function submitLogin() {
+        const formData = new FormData(form);
+        try {
+          const response = await fetch('/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(Object.fromEntries(formData.entries())),
+          });
+          const data = await response.json();
+          if (data.error) {
+            loginMsg.innerText = data.message;
+          }
+          else {
+            window.location.href = data.redirect;
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+      
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        submitLogin();
+      });
+    </script>
+  </body>
+</html>
