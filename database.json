@@ -1,0 +1,14 @@
+{
+  "records": [
+    {
+      "username": "admin1",
+      "email": "admin@website.com",
+      "password": "@dm1np@$$word123"
+    },
+    {
+      "username": "johndoe",
+      "email": "johndoe@example.com",
+      "password": "LorenIpsumDolorSit"
+    }
+  ]
+}
