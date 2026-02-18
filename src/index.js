@@ -2,7 +2,6 @@ const path = require("path");
 const fs = require("fs");
 
 const bcrypt = require("bcrypt");
-const saltRounds = 10;
 
 const express = require("express");
 
