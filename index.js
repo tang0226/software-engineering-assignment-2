@@ -14,10 +14,12 @@ app.use(express.json());
 const database = [
   {
     username: 'admin1',
+    email: 'admin@website.com',
     password: '@dm1np@$$word123',
   },
   {
     username: 'johndoe',
+    email: 'johndoe@example.com',
     password: 'LorenIpsumDolorSit',
   },
 ];
@@ -42,13 +44,13 @@ const startServer = async () => {
 
   app.post('/login', async (req, res) => {
     const { username, password } = req.body;
-    const userRecord = database.find(rec => rec.username === username);
+    const userRecord = database.find(rec => rec.username === username || rec.email === username);
 
     if (!userRecord) {
       // Send 'invalid login' message back to client
       return res.json({
         error: true,
-        message: 'Invalid username / password',
+        message: 'Invalid login / password',
       });
     }
     
@@ -64,7 +66,7 @@ const startServer = async () => {
       // Send 'invalid login' message back to client
       return res.json({
         error: true,
-        message: 'Invalid username / password',
+        message: 'Invalid login / password',
       });
     }
   });
