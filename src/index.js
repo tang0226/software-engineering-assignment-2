@@ -10,19 +10,23 @@ const getDatabase = require("./db.js");
 const app = express();
 const port = 3000;
 
+// Middleware for reading HTTP request
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// Middleware for serving static files
+app.use(express.static(path.join(__dirname, "public")));
 
 const startServer = async () => {
   // Get the database stub
   const database = await getDatabase();
 
   app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "/pages/index.html"));
+    res.sendFile(path.join(__dirname, "/public/pages/index.html"));
   });
 
   app.get("/login", (req, res) => {
-    res.sendFile(path.join(__dirname, "/pages/login.html"));
+    res.sendFile(path.join(__dirname, "/public/pages/login.html"));
   });
 
   app.post("/login", async (req, res) => {
@@ -57,7 +61,7 @@ const startServer = async () => {
   });
 
   app.get("/dashboard", (req, res) => {
-    res.sendFile(path.join(__dirname, "/pages/dashboard.html"));
+    res.sendFile(path.join(__dirname, "/public/pages/dashboard.html"));
   });
 
   app.listen(port, () => {
