@@ -1,6 +1,6 @@
 /******* 
 DATABASE STUB
-An emulated database meant to emulate interactions with a real database.
+Represents and imitates an external database
 *******/
 
 const fs = require("fs");
