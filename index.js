@@ -5,24 +5,18 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
 const express = require("express");
+
+const getDatabase = require("./db.js");
+
 const app = express();
 const port = 3000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Load the database
-const database = JSON.parse(fs.readFileSync("database.json", "utf8")).records;
-
-// Hash all passwords
-async function hashPasswords() {
-  for (const rec of database) {
-    rec.password = await bcrypt.hash(rec.password, saltRounds);
-  }
-}
-
 const startServer = async () => {
-  await hashPasswords();
+  // Get the database stub
+  const database = await getDatabase();
 
   app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "/pages/index.html"));
@@ -34,9 +28,9 @@ const startServer = async () => {
 
   app.post("/login", async (req, res) => {
     const { username, password } = req.body;
-    const userRecord = database.find(
+    const userRecord = database.select(
       (rec) => rec.username === username || rec.email === username,
-    );
+    )[0];
 
     if (!userRecord) {
       // Send "invalid login" message back to client
@@ -53,7 +47,8 @@ const startServer = async () => {
         success: true,
         redirect: "/dashboard",
       });
-    } else {
+    }
+    else {
       // Send "invalid login" message back to client
       return res.json({
         error: true,
