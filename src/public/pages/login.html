@@ -43,6 +43,7 @@
           const data = await response.json();
           if (data.error) {
             loginMsg.innerText = data.message;
+            setTimeout(() => { loginMsg.innerText = '' }, 3000);
           }
           else {
             window.location.href = data.redirect;
